@@ -9,7 +9,6 @@ import numpy as np
 import cv2
 from PIL import Image,ImageTk
 from tkinter import messagebox,filedialog
-#import matplotlib.pyplot as plt
 
 Gcheck = False
 Bcheck = False
@@ -236,6 +235,7 @@ btn_med.place(x=930,y=850)
 #關閉視窗
 btn_quit = tk.Button(width=10,height=1,text="Quit",command=Quit)
 btn_quit.pack(side="bottom")
+
 """
 佈局方式pack grid place
 grid(row=0,column=0) #網格佈局位置

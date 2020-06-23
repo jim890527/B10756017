@@ -120,6 +120,7 @@ def dilated(img):   #膨脹
     dilate = ImageTk.PhotoImage(image=dilate)
     lb_img.imgtk = dilate
     lb_img.configure(image=dilate)
+    return dilate
 
 def sobel(img):
     global img_s

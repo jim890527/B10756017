@@ -30,14 +30,14 @@ def creat(data,name):
     data.to_sql(name=name, con=connection,if_exists='replace')  # append, fail
     return connection
 
-def to_eng(df):
+def to_radar(df):
     df['mode'] = df['隨機模式']
     df['number'] = df['編號'].astype(str) 
     df['target'] = df['燈號位置'].astype(str) 
     df['reaction'] = df['反應時間']
     df['start_to_light'] = df['起點到燈號位置時間']
     df['light_to_start'] = df['燈號回起點位置實測時間']
-    df.drop(columns=['隨機模式','編號','燈號位置','反應時間','起點到燈號位置時間','燈號回起點位置實測時間'], axis=1, inplace=True)
+    df.drop(columns=['紀錄時間','隨機模式','編號','燈號位置','反應時間','起點到燈號位置時間','燈號回起點位置實測時間'], axis=1, inplace=True)
     del df['mode']
 
 def add_radar(target, color, ax, angles, df_r):
@@ -103,8 +103,9 @@ def radar(table, df_r, numberr ):   #table = title name
         plt.savefig(fname=str(table)+'.png', bbox_inches='tight', dpi=150)
 
 def main():
-    #df = pd.read_csv("game.csv", error_bad_lines=False)
-    df = pd.read_excel("game1.xlsx")
+    df = pd.read_csv("game1.csv")
+    #df = pd.read_excel("game1.xlsx")
+    df.dropna(axis=1, inplace=True)
     print(df)
     conn = creat(df,'badminton')   #create table
     #db = connDB()
@@ -113,15 +114,14 @@ def main():
     print('\r\n')
     df_sql = pd.read_sql('SELECT * FROM badminton', con=conn)   #select table to pandas
     del df_sql['index']
-    print(df_sql)
-    to_eng(df)  #dataframe translate to english
-    radar('Player0', df, '0')  #draw radar from dataframe (condition)
-    radar('Player11', df, '11')
-    radar('Player16', df, '16')
-    radar('Player17', df, '17')
-    radar('Player20', df, '20')
-    radar('Player25', df, '25')
-    radar('Player29', df, '29')
+    to_radar(df_sql)  #dataframe translate to english
+    radar('Player0', df_sql, '0')  #draw radar from dataframe (condition)
+    radar('Player11', df_sql, '11')
+    radar('Player16', df_sql, '16')
+    radar('Player17', df_sql, '17')
+    radar('Player20', df_sql, '20')
+    radar('Player25', df_sql, '25')
+    radar('Player29', df_sql, '29')
     #db.close()
 
 if __name__ == "__main__":

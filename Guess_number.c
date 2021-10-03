@@ -1,7 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-int contrast(int ans[]);
+int contrast(int x[]){
+	int i,j;
+	for(i=0;i<4;i++){
+		for(j=0;j<4;j++){
+			if(i!=j){
+				if(x[i]==x[j]){
+					return 0;
+				}
+			}	
+		}
+	}
+	return 1;
+}
 int main(){
 	int ans[4],input[4],count=0,A=0,B=0,i,j;
 	srand(time(NULL));
@@ -16,10 +28,10 @@ int main(){
 	printf("\n");
 	do{
 		A=0;B=0;
-		printf("½Ğ¿é¤J¥|­Ó¼Æ¦r:");
+		printf("Â½ÃÂ¿Ã©Â¤JÂ¥|Â­Ã“Â¼Ã†Â¦r:");
 		scanf("%1d%1d%1d%1d",&input[0],&input[1],&input[2],&input[3]);
 		while(contrast(input)==0){
-			printf("¿é¤J¿ù»~½Ğ­«·s¿é¤J!!!\n½Ğ¿é¤J¥|­Ó¼Æ¦r:");
+			printf("Â¿Ã©Â¤JÂ¿Ã¹Â»~Â½ÃÂ­Â«Â·sÂ¿Ã©Â¤J!!!\nÂ½ÃÂ¿Ã©Â¤JÂ¥|Â­Ã“Â¼Ã†Â¦r:");
 			scanf("%1d%1d%1d%1d",&input[0],&input[1],&input[2],&input[3]);
 		}
 		for(i=0;i<4;i++){
@@ -35,20 +47,6 @@ int main(){
 		if(A!=4)
 		printf("%dA%dB\n",A,B);
 	}while(A!=4);
-	printf("®¥³ßµª¹ï! ¦@µª¤F%d¦¸",count);
+	printf("Â®Â¥Â³ÃŸÂµÂªÂ¹Ã¯! Â¦@ÂµÂªÂ¤F%dÂ¦Â¸",count);
 	return 0;
 }
-int contrast(int x[]){
-	int i,j;
-	for(i=0;i<4;i++){
-		for(j=0;j<4;j++){
-			if(i!=j){
-				if(x[i]==x[j]){
-					return 0;
-				}
-			}	
-		}
-	}
-	return 1;
-}
-

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+
 int contrast(int x[]){
 	int i,j;
 	for(i=0;i<4;i++){

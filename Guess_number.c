@@ -14,6 +14,7 @@ int contrast(int x[]){
 	}
 	return 1;
 }
+
 int main(){
 	int ans[4],input[4],count=0,A=0,B=0,i,j;
 	srand(time(NULL));

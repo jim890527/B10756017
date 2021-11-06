@@ -199,7 +199,7 @@ def mi():
     print(df_sql)
     mi_pic(df_sql)
 
-def T_pic(result):
+def t_pic(result):
     labels = ['F-P1','P1-P2','P2-P3','P3-P1','P1-F']
     #result=result.groupby(['number']).mean().reset_index()
     kinds=result.apply(list).iloc[:, 0]
@@ -226,7 +226,7 @@ def T_pic(result):
         insertBLOB(str(kinds[i]), "t", r't/'+'T_'+str(kinds[i])+'.png')  # img to database
         plt.show()
     
-def T():
+def t():
     df = pd.read_excel("T.xls")
     conn = creat(df,'t')
     df = pd.read_sql('SELECT 編號,起點到1號,1號到2號,2號到3號 ,3號到1號,1號到起點 FROM t', con=conn)
@@ -241,12 +241,12 @@ def T():
     df_r_sort['P1-F'].astype('float')
     df_r_sort = df_r_sort.groupby(['number']).mean().reset_index()
     print(df_r_sort)
-    T_pic(df_r_sort)
+    t_pic(df_r_sort)
     
 def main():
     game()
     #mi()
-    T()
+    t()
     
 if __name__ == "__main__":
     main()

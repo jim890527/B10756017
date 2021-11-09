@@ -32,12 +32,25 @@ class DB:
         data.to_sql(name=name, con=connection, if_exists='replace')  # append, fail
         return connection
     
-    def drop_table(name):
-        connection = mysql.connect(host='localhost', user='root', password='', port = 8888, db='badminton')
-        cursor = connection.cursor()
-        run = ('DELETE FROM ' + str(name))
-        cursor.execute(run)
-        connection.commit()
+    def drop_table(name):   # input table name then del it
+        try:
+            connection = mysql.connect(host='localhost', user='root', password='', port = 8888, db='badminton')
+            cursor = connection.cursor()
+            run = ('DELETE FROM ' + str(name))
+            cursor.execute(run)
+            connection.commit()
+            print('Delete successfully')
+        except mysql.Error as error:
+                 print("Failed {}".format(error))
+                 
+    def drop_player_radar():
+        print('\r\nDELETE player_radar table? (1 is True)')
+        name = input()
+        if name == '1':
+            name = 'player_radar'
+            DB.drop_table(name)
+        else:
+            return
     
     def check(p_id, mode):      # check database is non have this tuple
         connection = sqlalchemy.create_engine("mysql+pymysql://root:@localhost:8888/badminton",encoding="utf-8", echo=False)    #connect 'badminton' database
@@ -253,7 +266,7 @@ def main():
     Game()
     #mi()
     T()
-    #DB.drop_table('player_radar')
+    DB.drop_player_radar()
     
 if __name__ == "__main__":
     main()
